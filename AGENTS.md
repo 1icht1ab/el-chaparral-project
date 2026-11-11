@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep order drafting in a dedicated frontend form and a same-origin streaming server route; this keeps secrets private and supports cancellation without buffering.
+- Store AI access circuit-breaker state in a server-only Cloud table, never customer orders; terminal access blocks must survive restarts without exposing customer data.
+- WhatsApp sharing uses the recipient picker until a verified shop phone is supplied; never send new flows to sample phone numbers.
