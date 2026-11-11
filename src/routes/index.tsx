@@ -130,7 +130,7 @@ function Index() {
           ))}
         </div>
         <ul className="divide-y rounded-2xl border bg-card px-5">
-          {menu[tab].map(([n, p]) => (
+          {(menu[tab] ?? []).map(([n, p]) => (
             <li key={n} className="flex items-baseline gap-3 py-4">
               <span className="min-w-0 font-semibold">{n}</span>
               <span className="flex-1 border-b border-dotted" />
