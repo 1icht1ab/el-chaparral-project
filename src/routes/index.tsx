@@ -56,7 +56,7 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
 
 function Index() {
   const tabs = Object.keys(menu);
-  const [tab, setTab] = useState(tabs[0]);
+  const [tab, setTab] = useState<string>("Cafés y Bebidas");
   return (
     <main className="font-sans">
       {/* Hero */}
