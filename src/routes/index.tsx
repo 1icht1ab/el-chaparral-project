@@ -7,7 +7,7 @@ import bandeja from "@/assets/bandeja.jpg";
 import tarta from "@/assets/tarta.jpg";
 import cesta from "@/assets/cesta.jpg";
 
-const CC = "C.C. [Nombre]";
+const CC = "C.C. La Gran Manzana";
 
 export const Route = createFileRoute("/")({
   head: () => ({
