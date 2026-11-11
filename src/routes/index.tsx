@@ -6,6 +6,7 @@ import roscon from "@/assets/roscon.jpg";
 import bandeja from "@/assets/bandeja.jpg";
 import tarta from "@/assets/tarta.jpg";
 import cesta from "@/assets/cesta.jpg";
+import { ChristmasOrderAssistant } from "@/components/orders/ChristmasOrderAssistant";
 
 const CC = "C.C. La Gran Manzana";
 
@@ -91,6 +92,8 @@ function Index() {
           ))}
         </div>
       </section>
+
+      <ChristmasOrderAssistant />
 
       {/* Cómo funciona */}
       <section className="bg-coffee px-5 py-16 text-coffee-foreground">
