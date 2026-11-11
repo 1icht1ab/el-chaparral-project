@@ -69,7 +69,7 @@ export async function handleOrder(request: Request) {
         controller.close();
       }
     },
-    cancel: () => iterator.return?.(),
+    cancel: async () => { await iterator.return?.(); },
   });
   return new Response(body, { headers: getLovableAiGatewayResponseHeaders({ "X-Lovable-AIG-Run-ID": gateway.getRunId() ?? "" }, {
     "Content-Type": "application/x-ndjson", "Cache-Control": "no-store, no-transform",
