@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CartaRouteImport } from './routes/carta'
+import { Route as PreguntasRouteImport } from './routes/preguntas'
 import { Route as ApiPublicChristmasOrderRouteImport } from './routes/api/public/christmas-order'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaRoute = CartaRouteImport.update({
+  id: '/carta',
+  path: '/carta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreguntasRoute = PreguntasRouteImport.update({
+  id: '/preguntas',
+  path: '/preguntas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicChristmasOrderRoute = ApiPublicChristmasOrderRouteImport.update({
@@ -25,27 +37,35 @@ const ApiPublicChristmasOrderRoute = ApiPublicChristmasOrderRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/carta': typeof CartaRoute
+  '/preguntas': typeof PreguntasRoute
   '/api/public/christmas-order': typeof ApiPublicChristmasOrderRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/carta': typeof CartaRoute
+  '/preguntas': typeof PreguntasRoute
   '/api/public/christmas-order': typeof ApiPublicChristmasOrderRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/carta': typeof CartaRoute
+  '/preguntas': typeof PreguntasRoute
   '/api/public/christmas-order': typeof ApiPublicChristmasOrderRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/christmas-order'
+  fullPaths: '/' | '/carta' | '/preguntas' | '/api/public/christmas-order'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/christmas-order'
-  id: '__root__' | '/' | '/api/public/christmas-order'
+  to: '/' | '/carta' | '/preguntas' | '/api/public/christmas-order'
+  id: '__root__' | '/' | '/carta' | '/preguntas' | '/api/public/christmas-order'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartaRoute: typeof CartaRoute
+  PreguntasRoute: typeof PreguntasRoute
   ApiPublicChristmasOrderRoute: typeof ApiPublicChristmasOrderRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta': {
+      id: '/carta'
+      path: '/carta'
+      fullPath: '/carta'
+      preLoaderRoute: typeof CartaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preguntas': {
+      id: '/preguntas'
+      path: '/preguntas'
+      fullPath: '/preguntas'
+      preLoaderRoute: typeof PreguntasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/christmas-order': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartaRoute: CartaRoute,
+  PreguntasRoute: PreguntasRoute,
   ApiPublicChristmasOrderRoute: ApiPublicChristmasOrderRoute,
 }
 export const routeTree = rootRouteImport
