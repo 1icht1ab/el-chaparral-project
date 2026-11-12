@@ -1,0 +1,18 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { Link, useLocation } from '@tanstack/react-router';
+import { Home, Coffee, CircleHelp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo.jpeg.asset.json';
+import { brand, copy, stores, type Language } from '@/content';
+import { storeStatus } from '@/lib/storefront-order';
+const Context = createContext<{ lang: Language; setLang: (value: Language) => void; sheetOpen: boolean; setSheetOpen: (value: boolean) => void }>({ lang: 'es', setLang: () => {}, sheetOpen: false, setSheetOpen: () => {} });
+export const useStorefront = () => useContext(Context);
+export function Logo({ className = '' }: { className?: string }) { return <img src={logo.url} alt={brand.alt} className={`shrink-0 object-contain ${className}`} />; }
+export function Storefront({ children }: { children: ReactNode }) {
+ const [lang, setLang] = useState<Language>('es'); const [ready, setReady] = useState(false); const [sheetOpen, setSheetOpen] = useState(false); const [now, setNow] = useState<Date | null>(null); const path = useLocation({ select: l => l.pathname });
+ useEffect(() => { try { const stored = localStorage.getItem('chaparral-language'); if (stored === 'en' || stored === 'es') setLang(stored); } catch {} setReady(true); setNow(new Date()); const timer = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(timer); }, []);
+ useEffect(() => { if (!ready) return; document.documentElement.lang = lang; try { localStorage.setItem('chaparral-language', lang); } catch {} }, [lang, ready]);
+ const tabs = [{ to: '/' as const, label: copy.home, icon: Home }, { to: '/carta' as const, label: copy.menu, icon: Coffee }, { to: '/preguntas' as const, label: copy.doubts, icon: CircleHelp }];
+ return <Context.Provider value={{ lang, setLang, sheetOpen, setSheetOpen }}><header className="site-header"><div className="header-main page-width"><Link to="/" className="brand-link"><Logo className="h-10 w-10" /><span><strong>{brand.name}</strong><small>{brand.subtitle}</small></span></Link><div className="header-actions"><div className="language-toggle" aria-label={copy.language[lang]}>{(['es','en'] as const).map(value => <Button key={value} variant="ghost" onClick={() => setLang(value)} aria-pressed={lang === value} className={lang === value ? 'language-active' : ''}>{value.toUpperCase()}</Button>)}</div><Button asChild className="header-order"><Link to="/" hash="catalogo">{copy.order[lang]}</Link></Button></div></div><div className="status-row page-width">{stores.map(store => { const status = now ? storeStatus(store.hours, now) : 'unknown'; const text = status === 'unknown' ? copy.hours[lang] : `${copy[status][lang]} ${String(status === 'open' ? store.hours?.close : store.hours?.open).padStart(2,'0')}:00`; return <Link key={store.id} to="/" hash="tiendas" className="status-chip"><span className={`status-dot status-${status}`} />{store.statusName} · {text}</Link>; })}</div></header><main className="page-width page-content">{children}</main>{!sheetOpen && <nav className="bottom-tabs" aria-label={copy.home[lang]}><div className="page-width">{tabs.map(({ to, label, icon: Icon }) => <Button key={to} asChild variant="ghost" className={path === to ? 'tab-active' : ''}><Link to={to} aria-current={path === to ? 'page' : undefined}><Icon />{label[lang]}</Link></Button>)}</div></nav>}</Context.Provider>;
+}
+export function Footer() { const { lang } = useStorefront(); return <footer className="storefront-footer"><Logo className="mx-auto h-10 w-10" /><p>{copy.footer[lang]}</p><div><Link to="/carta">{copy.menu[lang]}</Link><Link to="/preguntas">{copy.faq[lang]}</Link></div></footer>; }
