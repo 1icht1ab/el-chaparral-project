@@ -32,3 +32,4 @@ use the editor.
 - Keep order drafting in a dedicated frontend form and a same-origin streaming server route; this keeps secrets private and supports cancellation without buffering.
 - Store AI access circuit-breaker state in a server-only Cloud table, never customer orders; terminal access blocks must survive restarts without exposing customer data.
 - WhatsApp sharing uses the recipient picker until a verified shop phone is supplied; never send new flows to sample phone numbers.
+- The storefront keeps all editable bilingual content in src/content.ts and uses client-only order validation; this avoids customer-data network calls while retaining the existing TanStack bootstrap and inactive Cloud resources.

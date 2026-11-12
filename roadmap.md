@@ -1,5 +1,6 @@
-# Christmas order assistant
-- [x] Connect Cloud and configure AI Gateway.
-- [x] Add order description, streaming draft, editing, copy and WhatsApp sharing.
-- [x] Add persistent terminal-access protection and input validation.
-- [x] Verify live generation, cancellation and phone/desktop layouts.
+# Static storefront rebuild
+- [x] Rebuild three bilingual pages with shared navigation and supplied content.
+- [x] Replace AI assistant with a validated WhatsApp order sheet, retaining Cloud untouched.
+- [x] Test order rules, language, navigation, and mobile layout.
+- [x] Explain deployment limitation and unverified WhatsApp recipient.
+- [ ] Direct shop delivery awaits the owner's verified WhatsApp phone; recipient picker works meanwhile.
