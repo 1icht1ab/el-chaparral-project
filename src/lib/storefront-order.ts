@@ -1,4 +1,4 @@
-import { orderLabels, stores, WHATSAPP_NUMBER, WHATSAPP_VERIFIED, type Language, type Product } from '@/content';
+import { orderLabels, stores, WHATSAPP_NUMBER, type Language, type Product } from '@/content';
 export function minimumPickupDate(now = new Date()) {
  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2);
  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
@@ -13,6 +13,6 @@ export function orderMessage(product: Product, draft: OrderDraft, lang: Language
  const [year, month, day] = draft.date.split('-');
  return [labels[0], ...[product.name[lang], String(draft.quantity), store?.name ?? '', `${day}/${month}/${year}`, draft.name.trim(), draft.notes.trim() || '-'].map((value, i) => `${labels[i+1]}: ${value}`)].join('\n');
 }
-export function orderUrl(message: string) { return `https://wa.me/${WHATSAPP_VERIFIED ? WHATSAPP_NUMBER : ''}?text=${encodeURIComponent(message)}`; }
+export function orderUrl(message: string, number: string = WHATSAPP_NUMBER) { const text = encodeURIComponent(message); return number ? `https://wa.me/${number}?text=${text}` : `https://wa.me/?text=${text}`; }
 export function storeStatus(hours: { open: number; close: number } | null, now: Date) { return hours === null ? 'unknown' : now.getHours() >= hours.open && now.getHours() < hours.close ? 'open' : 'closed'; }
 export function confirmedFaq<T extends { confirmed: boolean }>(items: T[]) { return items.filter(item => item.confirmed); }

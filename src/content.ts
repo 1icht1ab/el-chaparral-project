@@ -1,8 +1,7 @@
 export type Language = 'es' | 'en';
 export type Localized = Record<Language, string>;
 const bi = (es: string, en: string): Localized => ({ es, en });
-export const WHATSAPP_NUMBER = '34600000000'; // Placeholder: owner must supply a verified shop number.
-export const WHATSAPP_VERIFIED = false;
+export const WHATSAPP_NUMBER: string = ''; // Empty until the owner supplies the verified shop number (digits only, with country code, e.g. 34XXXXXXXXX).
 export const brand = { name: 'EL CHAPARRAL', subtitle: 'PASTELERÍA', alt: 'El Chaparral' };
 export const stores = [
   { id: 'gm', name: 'C.C. La Gran Manzana', statusName: 'La Gran Manzana', detail: bi('Planta alta · Local 1.20 · Las Chafiras', 'Upper floor · Unit 1.20 · Las Chafiras'), hours: { open: 10, close: 22 }, hoursLabel: bi('L–D 10:00–22:00', 'Mon–Sun 10:00–22:00'), mapsUrl: 'https://www.google.com/maps/search/?api=1&query=CC+La+Gran+Manzana+Las+Chafiras', isNew: true },
