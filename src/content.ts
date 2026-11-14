@@ -2,6 +2,7 @@ import rosconImage from '@/assets/roscon-catalogo.jpg';
 import panettoneImage from '@/assets/panettone.jpg';
 import cestaImage from '@/assets/cesta.jpg';
 import bandejaImage from '@/assets/bandeja.jpg';
+import tartaImage from '@/assets/tarta.jpg';
 export type Language = 'es' | 'en';
 export type Localized = Record<Language, string>;
 const bi = (es: string, en: string): Localized => ({ es, en });
@@ -22,12 +23,25 @@ export const products = [
   { id: 'bandeja', name: bi('Bandeja de pastelería para cenas', 'Pastry tray for dinners'), description: bi('', ''), price: null, image: bandejaImage },
 ] as { id: string; name: Localized; description: Localized; price: number | null; image: string | null }[];
 export type Product = typeof products[number];
+// Featured speciality. Its button opens WhatsApp with `message` pre-filled instead of the order sheet.
+export const customCake = {
+  name: bi('Tartas Personalizadas a Medida', 'Made-to-Measure Custom Cakes'),
+  occasions: bi('Cumpleaños, Bautizos, Eventos y Navidad', 'Birthdays, Christenings, Events and Christmas'),
+  image: tartaImage,
+  message: bi('¡Hola El Chaparral! Quiero cotizar una Tarta Personalizada para [Nº de personas] el día [Fecha], para recoger en [La Gran Manzana / Costa del Silencio]. Mi idea es...', "Hello El Chaparral! I'd like a quote for a Custom Cake for [No. of people] on [Date], to pick up at [La Gran Manzana / Costa del Silencio]. My idea is..."),
+  stepsTitle: bi('Diseña tu Tarta Personalizada en 3 pasos', 'Design your Custom Cake in 3 steps'),
+  steps: [
+    bi('Cuéntanos tu idea, temática o envíanos una foto de referencia por WhatsApp.', 'Tell us your idea or theme, or send us a reference photo on WhatsApp.'),
+    bi('Elige tamaño (raciones) y relleno artesanal.', 'Choose the size (servings) and artisan filling.'),
+    bi('Recógela lista en cualquiera de nuestras 2 sucursales.', 'Pick it up ready at either of our 2 shops.'),
+  ],
+};
 export const copy = {
   banner: bi('🎄 Encargos de Navidad abiertos · Haz tu pedido por WhatsApp y recoge sin colas en C.C. La Gran Manzana o Costa del Silencio →', '🎄 Christmas orders are open · Order on WhatsApp and pick up without queuing at C.C. La Gran Manzana or Costa del Silencio →'),
   since: bi('Desde 2007', 'Since 2007'), badge: bi('Nueva tienda en el C.C. La Gran Manzana', 'New shop at C.C. La Gran Manzana'),
-  hero: bi('Encarga tus dulces de Navidad por WhatsApp y recógelos en La Gran Manzana o en Costa del Silencio.', 'Order your Christmas treats on WhatsApp and pick them up at La Gran Manzana or Costa del Silencio.'),
+  hero: bi('Especialistas en Tartas Personalizadas y Dulces de Navidad por encargo. Pide por WhatsApp y recoge sin colas en C.C. La Gran Manzana o Costa del Silencio', 'Specialists in Custom Cakes and Christmas Treats made to order. Order on WhatsApp and pick up without queuing at C.C. La Gran Manzana or Costa del Silencio'),
   catalogueButton: bi('Ver catálogo de Navidad', 'See Christmas catalogue'), menuButton: bi('Ver la carta del café', 'See the café menu'),
-  catalogue: bi('Encargos de Navidad', 'Christmas orders'), order: bi('Encargar', 'Order'), price: bi('Precio a consultar', 'Price on request'), photo: bi('Foto', 'Photo'),
+  catalogue: bi('Tartas personalizadas y encargos de Navidad', 'Custom cakes and Christmas orders'), order: bi('Encargar', 'Order'), price: bi('Precio a consultar', 'Price on request'), photo: bi('Foto', 'Photo'),
   quantity: bi('Cantidad', 'Quantity'), shop: bi('Tienda de recogida', 'Pick-up shop'), date: bi('Fecha de recogida', 'Pick-up date'), name: bi('Nombre', 'Name'), notes: bi('Notas (opcional)', 'Notes (optional)'),
   send: bi('Enviar por WhatsApp', 'Send via WhatsApp'), confirmation: bi('Te confirmamos disponibilidad y precio por WhatsApp.', "We'll confirm availability and price on WhatsApp."), close: bi('Cerrar', 'Close'), decrease: bi('Reducir cantidad', 'Decrease quantity'), increase: bi('Aumentar cantidad', 'Increase quantity'),
   how: bi('Cómo funciona', 'How it works'), shops: bi('Nuestras tiendas', 'Our shops'), new: bi('Nueva', 'New'), directions: bi('Cómo llegar →', 'Get directions →'), footer: bi('Pastelería El Chaparral · Desde 2007', 'Pastelería El Chaparral · Since 2007'),
@@ -48,7 +62,7 @@ export const faq = [
  ...[bi('¿Con cuánta antelación tengo que encargar?', 'How far in advance should I order?'), bi('¿Cómo se paga? ¿Hay que dejar señal?', 'How do I pay? Is a deposit required?'), bi('¿Tenéis opciones sin gluten o sin lactosa?', 'Do you have gluten-free or lactose-free options?'), bi('¿Hacéis envíos a domicilio?', 'Do you deliver?')].map((question, i) => ({ id: `pending-${i}`, confirmed: false, question, answer: bi('', '') })),
 ];
 export const seo = {
- home: { title: 'El Chaparral · Encargos de Navidad', description: copy.hero.es },
+ home: { title: 'El Chaparral · Tartas personalizadas y encargos de Navidad', description: copy.hero.es },
  menu: { title: 'Carta · El Chaparral', description: 'Carta de cafetería de El Chaparral. Precios en tienda.' },
  faq: { title: 'Preguntas frecuentes · El Chaparral', description: 'Tiendas y encargos de Navidad de El Chaparral.' },
 };
