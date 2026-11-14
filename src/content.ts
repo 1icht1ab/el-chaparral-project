@@ -2,7 +2,10 @@ import rosconImage from '@/assets/roscon-catalogo.jpg';
 import panettoneImage from '@/assets/panettone.jpg';
 import cestaImage from '@/assets/cesta.jpg';
 import bandejaImage from '@/assets/bandeja.jpg';
-import tartaImage from '@/assets/tarta.jpg';
+import cake1 from '@/assets/tarta-personalizada-1.jpg';
+import cake2 from '@/assets/tarta-personalizada-2.jpg';
+import cake3 from '@/assets/tarta-personalizada-3.jpg';
+import cake4 from '@/assets/tarta-personalizada-4.jpg';
 export type Language = 'es' | 'en';
 export type Localized = Record<Language, string>;
 const bi = (es: string, en: string): Localized => ({ es, en });
@@ -27,8 +30,19 @@ export type Product = typeof products[number];
 export const customCake = {
   name: bi('Tartas Personalizadas a Medida', 'Made-to-Measure Custom Cakes'),
   occasions: bi('Cumpleaños, Bautizos, Eventos y Navidad', 'Birthdays, Christenings, Events and Christmas'),
-  image: tartaImage,
-  message: bi('¡Hola El Chaparral! Quiero cotizar una Tarta Personalizada para [Nº de personas] el día [Fecha], para recoger en [La Gran Manzana / Costa del Silencio]. Mi idea es...', "Hello El Chaparral! I'd like a quote for a Custom Cake for [No. of people] on [Date], to pick up at [La Gran Manzana / Costa del Silencio]. My idea is..."),
+  photos: [
+    { src: cake4, alt: bi('Tarta de dos pisos con conchas y estrellas de mar', 'Two-tier cake with shells and starfish') },
+    { src: cake3, alt: bi('Tarta azul con lunas y estrellas doradas', 'Blue cake with golden moons and stars') },
+    { src: cake1, alt: bi('Tarta con tortugas marinas y estrella de mar', 'Cake with sea turtles and a starfish') },
+    { src: cake2, alt: bi('Tarta de cumpleaños con perrito y globos', 'Birthday cake with a puppy and balloons') },
+  ],
+  // The shop needs these details to prepare a custom cake; the customer fills them in inside WhatsApp.
+  message: bi(
+    '¡Hola El Chaparral! Quiero cotizar una Tarta Personalizada.\n\nFecha: \nForma de la tarta: \nTemática/decoración: \nNúmero de adultos/niños: \nNúmero de pisos: \nRecogida en: La Gran Manzana / Costa del Silencio\n\nMi idea es...',
+    "Hello El Chaparral! I'd like a quote for a Custom Cake.\n\nDate: \nCake shape: \nTheme/decoration: \nNumber of adults/children: \nNumber of tiers: \nPick-up at: La Gran Manzana / Costa del Silencio\n\nMy idea is...",
+  ),
+  detailsTitle: bi('Para prepararla necesitamos saber:', 'To prepare it we need to know:'),
+  details: [bi('Fecha', 'Date'), bi('Forma de la tarta', 'Cake shape'), bi('Temática o decoración', 'Theme or decoration'), bi('Número de adultos y niños', 'Number of adults and children'), bi('Número de pisos', 'Number of tiers')],
   stepsTitle: bi('Diseña tu Tarta Personalizada en 3 pasos', 'Design your Custom Cake in 3 steps'),
   steps: [
     bi('Cuéntanos tu idea, temática o envíanos una foto de referencia por WhatsApp.', 'Tell us your idea or theme, or send us a reference photo on WhatsApp.'),
