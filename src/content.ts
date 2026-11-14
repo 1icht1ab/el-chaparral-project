@@ -1,5 +1,4 @@
-import rosconImage from '@/assets/roscon-catalogo.jpg';
-import panettoneImage from '@/assets/panettone.jpg';
+import rosconImage from '@/assets/roscon.jpg';
 import cestaImage from '@/assets/cesta.jpg';
 import bandejaImage from '@/assets/bandeja.jpg';
 import cake1 from '@/assets/tarta-personalizada-1.jpg';
@@ -20,15 +19,15 @@ export const stores = [
   { id: 'cs', name: 'Costa del Silencio', statusName: 'Costa del Silencio', detail: bi('Urb. El Chaparral · Arona', 'El Chaparral estate · Arona'), hours: null, hoursLabel: bi('Horario: consultar', 'Hours: please ask'), mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pasteleria+El+Chaparral+Costa+del+Silencio', isNew: false },
 ];
 export const products = [
-  { id: 'roscon', name: bi('Roscón de Reyes artesanal', 'Artisan Roscón de Reyes'), description: bi('', ''), price: null, image: rosconImage },
-  { id: 'panettone', name: bi('Panettone', 'Panettone'), description: bi('', ''), price: null, image: panettoneImage },
-  { id: 'cesta', name: bi('Cesta de desayuno navideño', 'Christmas breakfast basket'), description: bi('', ''), price: null, image: cestaImage },
-  { id: 'bandeja', name: bi('Bandeja de pastelería para cenas', 'Pastry tray for dinners'), description: bi('', ''), price: null, image: bandejaImage },
+  { id: 'bandejas', name: bi('Bandejas Navideñas de Salados, Sándwiches de Miga y Empanadas para cenas festivas', 'Christmas Trays of Savouries, Crustless Sandwiches and Empanadas for festive dinners'), description: bi('', ''), price: null, image: bandejaImage },
+  { id: 'cajas', name: bi('Cajas Dulces de Alfajores Artesanales, Facturas y Medialunas', 'Sweet Boxes of Artisan Alfajores, Argentine Pastries and Medialunas'), description: bi('', ''), price: null, image: cestaImage },
+  { id: 'especiales', name: bi('Especiales de Navidad y Reyes', 'Christmas and Three Kings Specials'), description: bi('Roscón de Reyes artesanal, panettone y cesta de desayuno navideño.', 'Artisan Roscón de Reyes, panettone and Christmas breakfast basket.'), price: null, image: rosconImage },
 ] as { id: string; name: Localized; description: Localized; price: number | null; image: string | null }[];
 export type Product = typeof products[number];
 // Featured speciality. Its button opens WhatsApp with `message` pre-filled instead of the order sheet.
 export const customCake = {
-  name: bi('Tartas Personalizadas a Medida', 'Made-to-Measure Custom Cakes'),
+  name: bi('Tortas Personalizadas a Medida', 'Made-to-Measure Custom Cakes'),
+  badge: bi('Nuestra gran especialidad', 'Our great speciality'),
   occasions: bi('Cumpleaños, Bautizos, Eventos y Navidad', 'Birthdays, Christenings, Events and Christmas'),
   photos: [
     { src: cake4, alt: bi('Tarta de dos pisos con conchas y estrellas de mar', 'Two-tier cake with shells and starfish') },
@@ -59,12 +58,27 @@ export const copy = {
   quantity: bi('Cantidad', 'Quantity'), shop: bi('Tienda de recogida', 'Pick-up shop'), date: bi('Fecha de recogida', 'Pick-up date'), name: bi('Nombre', 'Name'), notes: bi('Notas (opcional)', 'Notes (optional)'),
   send: bi('Enviar por WhatsApp', 'Send via WhatsApp'), confirmation: bi('Te confirmamos disponibilidad y precio por WhatsApp.', "We'll confirm availability and price on WhatsApp."), close: bi('Cerrar', 'Close'), decrease: bi('Reducir cantidad', 'Decrease quantity'), increase: bi('Aumentar cantidad', 'Increase quantity'),
   how: bi('Cómo funciona', 'How it works'), shops: bi('Nuestras tiendas', 'Our shops'), new: bi('Nueva', 'New'), directions: bi('Cómo llegar →', 'Get directions →'), footer: bi('Pastelería El Chaparral · Desde 2007', 'Pastelería El Chaparral · Since 2007'),
-  menu: bi('Carta', 'Menu'), menuSubtitle: bi('Precios en tienda', 'Prices in store'), allergens: bi('Información sobre alérgenos disponible en tienda. Pregunta a nuestro equipo.', 'Allergen information available in store. Ask our team.'), faq: bi('Preguntas frecuentes', 'FAQ'), home: bi('Inicio', 'Home'), doubts: bi('Dudas', 'FAQ'),
+  menu: bi('Carta', 'Menu'), menuSection: bi('Carta Argentina y Café', 'Argentine Menu & Coffee'), menuFull: bi('Ver la carta completa', 'See the full menu'), openMenu: bi('Abrir menú', 'Open menu'), closeMenu: bi('Cerrar menú', 'Close menu'), navigation: bi('Menú', 'Menu'), menuSubtitle: bi('Precios en tienda', 'Prices in store'), allergens: bi('Información sobre alérgenos disponible en tienda. Pregunta a nuestro equipo.', 'Allergen information available in store. Ask our team.'), faq: bi('Preguntas frecuentes', 'FAQ'), home: bi('Inicio', 'Home'), doubts: bi('Dudas', 'FAQ'),
   open: bi('Abierto hasta las', 'Open until'), closed: bi('Cerrado · abre a las', 'Closed · opens at'), hours: bi('Ver horario', 'See hours'), language: bi('Idioma', 'Language'),
 };
 export const orderLabels = { es: ['PEDIDO NAVIDAD', 'Producto', 'Cantidad', 'Tienda', 'Fecha', 'Nombre', 'Notas'], en: ['CHRISTMAS ORDER', 'Product', 'Quantity', 'Shop', 'Date', 'Name', 'Notes'] };
 export const steps = [bi('Elige tu producto y pulsa Encargar.', 'Choose your product and tap Order.'), bi('Indica tienda y día de recogida, y envíanos el pedido por WhatsApp.', 'Pick the shop and day, and send us the order on WhatsApp.'), bi('Te confirmamos el pedido y lo recoges ya preparado en la tienda elegida.', 'We confirm your order and you pick it up ready at your chosen shop.')];
+export const navLinks = [
+  { id: 'home', hash: undefined, label: bi('Inicio', 'Home') },
+  { id: 'catalogo', hash: 'catalogo', label: bi('Encargos y Tortas', 'Orders & Cakes') },
+  { id: 'carta', hash: 'carta', label: bi('Carta Argentina y Café', 'Argentine Menu & Coffee') },
+  { id: 'historia', hash: 'historia', label: bi('Nuestra Historia', 'Our Story') },
+  { id: 'tiendas', hash: 'tiendas', label: bi('Nuestras 2 Tiendas', 'Our 2 Shops') },
+] as const;
+export const story = {
+  title: bi('Nuestra Historia · Bajo un Mismo Sol', 'Our Story · Under the Same Sun'),
+  subtitle: bi('Desde 2007 · Un puente entre culturas', 'Since 2007 · A bridge between cultures'),
+  body: bi('El Chaparral nació en 2007 respetando el nombre de nuestra localización en Costa del Silencio, pero con la esencia de un encuentro cultural. Más allá de traer nuestras tradiciones argentinas —tortas personalizadas, alfajores, medialunas, facturas, empanadas y sándwiches—, nuestra misión es crear un puente que hermane dos tierras cálidas. Bajo el bendito sol de Tenerife, trajimos con orgullo nuestro Sol de Mayo: símbolo de libertad, calidez y alegría en cada producto que horneamos.', 'El Chaparral was born in 2007, keeping the name of our location in Costa del Silencio but with the essence of a cultural encounter. Beyond bringing our Argentine traditions — custom cakes, alfajores, medialunas, facturas, empanadas and sandwiches — our mission is to build a bridge that unites two warm lands. Under the blessed sun of Tenerife, we proudly brought our Sol de Mayo: a symbol of freedom, warmth and joy in every product we bake.'),
+  closing: bi('Siempre bajo un mismo sol.', 'Always under the same sun.'),
+  sunAlt: bi('Sol de Mayo del logo de El Chaparral', "Sol de Mayo from El Chaparral's logo"),
+};
 export const cafeMenu = [
+ { id: 'orders', name: bi('Especialidades por encargo', 'Made-to-order specialities'), items: [bi('Tortas Personalizadas a Medida', 'Made-to-Measure Custom Cakes'), bi('Bandejas Navideñas de Salados, Sándwiches de Miga y Empanadas', 'Christmas Trays of Savouries, Crustless Sandwiches and Empanadas'), bi('Cajas Dulces de Alfajores Artesanales, Facturas y Medialunas', 'Sweet Boxes of Artisan Alfajores, Argentine Pastries and Medialunas'), bi('Especiales de Navidad y Reyes', 'Christmas and Three Kings Specials')] },
  { id: 'breakfast', name: bi('Desayunos', 'Breakfast'), items: [bi('Café con leche', 'White coffee'), bi('Zumo de naranja natural', 'Fresh orange juice'), bi('Sándwich de miga', 'Crustless sandwich')] },
  { id: 'pastries', name: bi('Facturas argentinas', 'Argentine pastries'), items: [bi('Medialunas', 'Medialunas (Argentine croissants)'), bi('Facturas con dulce de leche', 'Pastries with dulce de leche'), bi('Cañoncitos de dulce de leche', 'Dulce de leche cañoncitos')] },
  { id: 'savoury', name: bi('Salados', 'Savoury'), items: [bi('Empanadas argentinas', 'Argentine empanadas'), bi('Bocadillos y pulgas', 'Sandwiches & rolls')] },
