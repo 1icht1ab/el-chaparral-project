@@ -2,12 +2,12 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { Link, useLocation } from '@tanstack/react-router';
 import { Home, Coffee, CircleHelp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/logo.jpeg.asset.json';
+import logoUrl from '@/assets/logo.png';
 import { brand, copy, stores, type Language } from '@/content';
 import { storeStatus } from '@/lib/storefront-order';
 const Context = createContext<{ lang: Language; setLang: (value: Language) => void; sheetOpen: boolean; setSheetOpen: (value: boolean) => void }>({ lang: 'es', setLang: () => {}, sheetOpen: false, setSheetOpen: () => {} });
 export const useStorefront = () => useContext(Context);
-export function Logo({ className = '' }: { className?: string }) { return <img src={logo.url} alt={brand.alt} className={`shrink-0 object-contain ${className}`} />; }
+export function Logo({ className = '' }: { className?: string }) { return <img src={logoUrl} alt={brand.alt} className={`shrink-0 object-contain ${className}`} />; }
 export function Storefront({ children }: { children: ReactNode }) {
  const [lang, setLang] = useState<Language>('es'); const [ready, setReady] = useState(false); const [sheetOpen, setSheetOpen] = useState(false); const [now, setNow] = useState<Date | null>(null); const path = useLocation({ select: l => l.pathname });
  useEffect(() => { try { const stored = localStorage.getItem('chaparral-language'); if (stored === 'en' || stored === 'es') setLang(stored); } catch {} setReady(true); setNow(new Date()); const timer = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(timer); }, []);

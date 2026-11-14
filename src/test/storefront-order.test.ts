@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { confirmedFaq, minimumPickupDate, orderMessage, orderUrl, storeStatus, validOrder } from '@/lib/storefront-order';
-import { faq, products } from '@/content';
+import { faq, products, WHATSAPP_NUMBER } from '@/content';
 const now = new Date(2026, 10, 12, 15);
 const draft = { quantity: 1, shop: 'gm', date: '2026-11-14', name: 'Ana', notes: '' };
 describe('Static storefront rules', () => {
@@ -10,7 +10,7 @@ describe('Static storefront rules', () => {
  it('requires a name of at most 40 characters', () => { expect(validOrder({ ...draft, name: ' ' }, now)).toBe(false); expect(validOrder({ ...draft, name: 'a'.repeat(40) }, now)).toBe(true); expect(validOrder({ ...draft, name: 'a'.repeat(41) }, now)).toBe(false); });
  it('allows optional notes up to 120 characters', () => { expect(validOrder({ ...draft, notes: 'a'.repeat(120) }, now)).toBe(true); expect(validOrder({ ...draft, notes: 'a'.repeat(121) }, now)).toBe(false); });
  it('produces exact Spanish and English message labels', () => { const product = products[0]; if (!product) throw new Error('Missing product'); expect(orderMessage(product, draft, 'es')).toBe('PEDIDO NAVIDAD\nProducto: Roscón de Reyes artesanal\nCantidad: 1\nTienda: C.C. La Gran Manzana\nFecha: 14/11/2026\nNombre: Ana\nNotas: -'); expect(orderMessage(product, draft, 'en')).toBe('CHRISTMAS ORDER\nProduct: Artisan Roscón de Reyes\nQuantity: 1\nShop: C.C. La Gran Manzana\nDate: 14/11/2026\nName: Ana\nNotes: -'); });
- it('opens the recipient picker rather than a sample number', () => { expect(new URL(orderUrl('test')).pathname).toBe('/'); });
+ it('sends orders to the configured shop number', () => { expect(new URL(orderUrl('test')).pathname).toBe(`/${WHATSAPP_NUMBER}`); expect(WHATSAPP_NUMBER).toMatch(/^[1-9]\d{7,14}$/); });
  it('targets the shop number once one is supplied', () => { expect(orderUrl('a b', '34123456789')).toBe('https://wa.me/34123456789?text=a%20b'); expect(orderUrl('a b', '')).toBe('https://wa.me/?text=a%20b'); });
  it('computes the 10 to 22 opening window', () => { expect(storeStatus({ open: 10, close: 22 }, new Date(2026, 10, 12, 10))).toBe('open'); expect(storeStatus({ open: 10, close: 22 }, new Date(2026, 10, 12, 22))).toBe('closed'); expect(storeStatus(null, now)).toBe('unknown'); });
  it('shows only the two confirmed FAQ entries', () => { expect(confirmedFaq(faq).map(item => item.id)).toEqual(['shops', 'order']); });
