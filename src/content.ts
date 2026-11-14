@@ -1,20 +1,29 @@
+import rosconImage from '@/assets/roscon-catalogo.jpg';
+import panettoneImage from '@/assets/panettone.jpg';
+import cestaImage from '@/assets/cesta.jpg';
+import bandejaImage from '@/assets/bandeja.jpg';
 export type Language = 'es' | 'en';
 export type Localized = Record<Language, string>;
 const bi = (es: string, en: string): Localized => ({ es, en });
 export const WHATSAPP_NUMBER: string = '34633032738'; // Digits only, with country code and no leading 00 or +. Leave empty to fall back to WhatsApp's recipient picker.
 export const brand = { name: 'EL CHAPARRAL', subtitle: 'PASTELERÍA', alt: 'El Chaparral' };
+export const social = [
+  { id: 'instagram', label: bi('Instagram de El Chaparral', 'El Chaparral on Instagram'), url: 'https://www.instagram.com/pasteleriaelchaparral/' },
+  { id: 'facebook', label: bi('Facebook de El Chaparral', 'El Chaparral on Facebook'), url: 'https://www.facebook.com/ElchaparralCostadelsilencio/' },
+] as const;
 export const stores = [
   { id: 'gm', name: 'C.C. La Gran Manzana', statusName: 'La Gran Manzana', detail: bi('Planta alta · Local 1.20 · Las Chafiras', 'Upper floor · Unit 1.20 · Las Chafiras'), hours: { open: 10, close: 22 }, hoursLabel: bi('L–D 10:00–22:00', 'Mon–Sun 10:00–22:00'), mapsUrl: 'https://www.google.com/maps/search/?api=1&query=CC+La+Gran+Manzana+Las+Chafiras', isNew: true },
   { id: 'cs', name: 'Costa del Silencio', statusName: 'Costa del Silencio', detail: bi('Urb. El Chaparral · Arona', 'El Chaparral estate · Arona'), hours: null, hoursLabel: bi('Horario: consultar', 'Hours: please ask'), mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pasteleria+El+Chaparral+Costa+del+Silencio', isNew: false },
 ];
 export const products = [
-  { id: 'roscon', name: bi('Roscón de Reyes artesanal', 'Artisan Roscón de Reyes'), description: bi('', ''), price: null, image: null },
-  { id: 'panettone', name: bi('Panettone', 'Panettone'), description: bi('', ''), price: null, image: null },
-  { id: 'cesta', name: bi('Cesta de desayuno navideño', 'Christmas breakfast basket'), description: bi('', ''), price: null, image: null },
-  { id: 'bandeja', name: bi('Bandeja de pastelería para cenas', 'Pastry tray for dinners'), description: bi('', ''), price: null, image: null },
+  { id: 'roscon', name: bi('Roscón de Reyes artesanal', 'Artisan Roscón de Reyes'), description: bi('', ''), price: null, image: rosconImage },
+  { id: 'panettone', name: bi('Panettone', 'Panettone'), description: bi('', ''), price: null, image: panettoneImage },
+  { id: 'cesta', name: bi('Cesta de desayuno navideño', 'Christmas breakfast basket'), description: bi('', ''), price: null, image: cestaImage },
+  { id: 'bandeja', name: bi('Bandeja de pastelería para cenas', 'Pastry tray for dinners'), description: bi('', ''), price: null, image: bandejaImage },
 ] as { id: string; name: Localized; description: Localized; price: number | null; image: string | null }[];
 export type Product = typeof products[number];
 export const copy = {
+  banner: bi('🎄 Encargos de Navidad abiertos · Haz tu pedido por WhatsApp y recoge sin colas en C.C. La Gran Manzana o Costa del Silencio →', '🎄 Christmas orders are open · Order on WhatsApp and pick up without queuing at C.C. La Gran Manzana or Costa del Silencio →'),
   since: bi('Desde 2007', 'Since 2007'), badge: bi('Nueva tienda en el C.C. La Gran Manzana', 'New shop at C.C. La Gran Manzana'),
   hero: bi('Encarga tus dulces de Navidad por WhatsApp y recógelos en La Gran Manzana o en Costa del Silencio.', 'Order your Christmas treats on WhatsApp and pick them up at La Gran Manzana or Costa del Silencio.'),
   catalogueButton: bi('Ver catálogo de Navidad', 'See Christmas catalogue'), menuButton: bi('Ver la carta del café', 'See the café menu'),
